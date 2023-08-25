@@ -1,4 +1,4 @@
-FROM node:12.18-alpine
+FROM node:latest
 
 WORKDIR /app
 
@@ -6,6 +6,4 @@ COPY . .
 
 RUN npm install
 
-# Production
-RUN npm install -g pm2
-CMD ["pm2-runtime", "ecosystem.config.js", "--env", "production"]
+CMD ["npm", "start"]
