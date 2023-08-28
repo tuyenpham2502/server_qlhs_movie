@@ -35,7 +35,7 @@ export const findUser = async (
 // Sign Token
 export const signToken = async (user: DocumentType<User>) => {
   // Sign the access token
-  const access_token = signJwt(
+  const accessToken = signJwt(
     { sub: user._id },
     {
       expiresIn: `${config.get<number>('accessTokenExpiresIn')}m`,
@@ -43,7 +43,7 @@ export const signToken = async (user: DocumentType<User>) => {
   );
 
     // Sign the refresh token
-    const refresh_token = signJwt(
+    const refreshToken = signJwt(
         { sub: user._id },
         {
             expiresIn: `${config.get<number>('refreshTokenExpiresIn')}d`,
@@ -58,6 +58,6 @@ export const signToken = async (user: DocumentType<User>) => {
     
 
   // Return access token
-  return { access_token, refresh_token };
+  return { accessToken, refreshToken };
 };
 
