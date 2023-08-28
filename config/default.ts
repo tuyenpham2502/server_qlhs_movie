@@ -1,6 +1,6 @@
 export default {
-  port: 3000,
+  port: 8080,
   accessTokenExpiresIn: 15,
   refreshTokenExpiresIn: 30,
-origin: 'http://localhost:3000',
+origin: 'http://localhost:8080',
 };
