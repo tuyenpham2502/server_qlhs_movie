@@ -57,7 +57,7 @@ services:
 
   redis:
     ports:
-      - "6379:6379"
+      - "${REDIS_PORT}:${REDIS_PORT}"
     image: redis
     command: redis-server
     networks:
