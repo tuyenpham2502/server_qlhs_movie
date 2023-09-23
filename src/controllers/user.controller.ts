@@ -10,7 +10,7 @@ export const getMeHandler = (
     const user = res.locals.user;
     res.status(200).json({
       status: 'success',
-      data: {
+      getMyProfile: {
         user,
       },
     });
@@ -29,7 +29,7 @@ export const getAllUsersHandler = async (
     res.status(200).json({
       status: 'success',
       result: users.length,
-      data: {
+      getAllUser: {
         users,
       },
     });

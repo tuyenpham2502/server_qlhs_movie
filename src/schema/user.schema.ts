@@ -28,12 +28,5 @@ export const loginUserSchema = object({
   }),
 });
 
-export const logoutUserSchema = object({
-  body: object({
-    refreshToken: string({ required_error: 'Refresh token is required' }),
-  }),
-});
-
-
 export type CreateUserInput = TypeOf<typeof createUserSchema>['body'];
 export type LoginUserInput = TypeOf<typeof loginUserSchema>['body'];

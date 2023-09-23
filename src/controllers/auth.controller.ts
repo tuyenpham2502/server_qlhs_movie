@@ -3,11 +3,7 @@ import { CookieOptions, NextFunction, Request, Response } from "express";
 import { CreateUserInput, LoginUserInput } from "../schema/user.schema";
 import { createUser, findUser, signToken } from "../services/user.service";
 import AppError from "../utils/appError";
-import {
-  deserializeUser,
-} from "../middleware/deserializeUser";
 import redisClient from "../utils/connectRedis";
-import { Context } from "../types/context";
 
 // Exclude this fields from the response
 export const excludedFields = ["password"];
@@ -52,7 +48,7 @@ export const registerHandler = async (
       password: req.body.password,
     });
 
-    res.status(201).json({
+    res.status(200).json({
       status: "success",
       data: {
         user,
@@ -60,7 +56,7 @@ export const registerHandler = async (
     });
   } catch (err: any) {
     if (err.code === 11000) {
-      return res.status(409).json({
+      return res.status(202).json({
         status: "fail",
         message: "Email already exist",
       });
@@ -83,7 +79,7 @@ export const loginHandler = async (
       !user ||
       !(await user.comparePasswords(user.password, req.body.password))
     ) {
-      return next(new AppError("Invalid email or password", 401));
+      return next(new AppError("Invalid email or password", 202));
     }
 
     // Create an Access Token, refresh token and send it to the client
