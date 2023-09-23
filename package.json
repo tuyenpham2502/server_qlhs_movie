@@ -5,7 +5,8 @@
   "author": "Pham Tuyen",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node-dev --respawn --transpile-only src/app.ts"
+    "dev": "ts-node-dev --respawn --transpileOnly ./src/app.ts",
+    "start": "node dist/app.js",
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
