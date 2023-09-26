@@ -7,6 +7,7 @@ import {
   prop,
 } from '@typegoose/typegoose';
 import bcrypt from 'bcryptjs';
+import { nanoid } from 'nanoid';
 
 @index({ email: 1 })
 @pre<User>('save', async function () {
@@ -25,6 +26,10 @@ import bcrypt from 'bcryptjs';
 
 // Export the User class to be used as TypeScript type
 export class User {
+
+  @prop({unique: true, default: ()=> nanoid(15) })
+    userId!: string;
+
   @prop()
     name!: string;
 
@@ -34,8 +39,8 @@ export class User {
   @prop({ required: true, minlength: 8, maxLength: 32, select: false })
     password!: string;
 
-  @prop({ default: 'user' })
-    role!: string;
+  @prop({default: 'user'})
+    role!: Array<string>;
 
   // Instance method to check if passwords match
   async comparePasswords(hashedPassword: string, candidatePassword: string) {
