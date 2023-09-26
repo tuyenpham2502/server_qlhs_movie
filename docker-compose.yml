@@ -38,13 +38,13 @@ services:
       MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD}
       MONGO_INITDB_DATABASE: ${MONGODB_DATABASE_NAME}
-    # ports:
-    #   - "${DB_PORT}:${DB_PORT}"
-    # healthcheck:
-    #   test: echo 'db.runCommand("ping").ok' | mongo mongodb+srv://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@localhost:${DB_PORT} --quiet
-    #   interval: 30s
-    #   timeout: 10s
-    #   retries: 5
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo mongodb+srv://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@localhost:${DB_PORT} --quiet
+      interval: 30s
+      timeout: 10s
+      retries: 5
     volumes:
       - .docker/data/db:/data/db
     restart: unless-stopped
