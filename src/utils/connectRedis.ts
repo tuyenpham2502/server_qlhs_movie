@@ -1,9 +1,7 @@
 import { createClient } from 'redis';
 
 const redisUrl = `127.0.0.1:6379`;
-const   redisClient = createClient({
-  url: redisUrl,
-});
+const   redisClient = createClient();
 
 const connectRedis = async () => {
   try {
