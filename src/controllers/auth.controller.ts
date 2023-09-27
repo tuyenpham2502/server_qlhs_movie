@@ -4,7 +4,7 @@ import { CreateUserInput, LoginUserInput } from "../schema/user.schema";
 import { createUser, findUser, signToken } from "../services/user.service";
 import AppError from "../utils/appError";
 import redisClient from "../utils/connectRedis";
-
+import NodeMailer from 'nodemailer'
 // Exclude this fields from the response
 export const excludedFields = ["password"];
 
@@ -35,6 +35,19 @@ const refreshTokenCookieOptions: CookieOptions = {
 
 // Only set secure to true in production
 if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
+
+
+
+//node mailer 
+let transporter = NodeMailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: config.get<string>('AUTH_EMAIL'),
+
+
+
+
+
 
 export const registerHandler = async (
   req: Request<{}, {}, CreateUserInput>,

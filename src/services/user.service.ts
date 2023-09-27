@@ -32,6 +32,14 @@ export const findUser = async (
   return await userModel.findOne(query, {}, options).select('+password');
 };
 
+export const updateMe = async (id: string, input: Partial<User>) => {
+  return userModel.findByIdAndUpdate(id, input, {
+    new: true,
+    runValidators: true,
+  });
+}
+
+
 // Sign Token
 export const signToken = async (user: DocumentType<User>) => {
   // Sign the access token

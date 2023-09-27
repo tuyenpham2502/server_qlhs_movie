@@ -3,4 +3,5 @@ export default {
   accessTokenExpiresIn: 15,
   refreshTokenExpiresIn: 30,
   origin: '*',
+  authEmail: tuyenpha,
 };

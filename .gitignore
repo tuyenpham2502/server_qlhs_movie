@@ -17,3 +17,6 @@ public/FileStorage/*
 !.docker/data/db/.gitkeep
 .docker/data/redis/*
 !.docker/data/redis/.gitkeep
+
+#env
+.env.local
