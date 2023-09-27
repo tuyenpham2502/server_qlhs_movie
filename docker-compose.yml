@@ -1,10 +1,10 @@
-version: '3.8'
+version: '3.7'
 services:
   app :
     build:
-      context: contextPath
+      context: .
       dockerfile: Dockerfile
-    image: test 
+    image: qlhs-app 
     volumes:
       - ./:/app # mount the current directory to /app inside the container
     environment:
@@ -47,7 +47,6 @@ services:
       retries: 5
     volumes:
       - .docker/data/db:/data/db
-      - .docker/db-entrypoint.sh:/docker-entrypoint-initdb.d/db-entrypoint.sh
     restart: unless-stopped
     networks:
       - db-network
@@ -57,7 +56,7 @@ services:
 
   redis:
     ports:
-      - "6379:6379"
+      - "${REDIS_PORT}:${REDIS_PORT}"
     image: redis
     command: redis-server
     networks:

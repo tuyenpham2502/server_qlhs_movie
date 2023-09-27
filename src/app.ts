@@ -7,16 +7,18 @@ import cookieParser from 'cookie-parser';
 import connectDB from './utils/connectDB';
 import userRouter from './routes/user.route';
 import authRouter from './routes/auth.route';
-
+import uploadRouter from './routes/images.route';
+import path from 'path';
 const app = express();
 
 // Middleware
 
 // 1. Body Parser
 app.use(express.json({ limit: '10kb' }));
-
 // 2. Cookie Parser
 app.use(cookieParser());
+
+app.use(express.static('public'));
 
 // 3. Logger
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
@@ -29,15 +31,16 @@ app.use(
   })
 );
 
+
 // 5. Routes
 app.use('/api/users', userRouter);
 app.use('/api/auth', authRouter);
-
+app.use('/api', uploadRouter);
 // Testing
 app.get('/healthChecker', (req: Request, res: Response, next: NextFunction) => {
   res.status(200).json({
     status: 'success',
-    message: 'Welcome to CodevoWeb????',
+    message: 'Welcome to QLHS',
   });
 });
 

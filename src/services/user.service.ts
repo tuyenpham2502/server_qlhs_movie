@@ -32,19 +32,29 @@ export const findUser = async (
   return await userModel.findOne(query, {}, options).select('+password');
 };
 
+export const updateMe = async (id: string, input: Partial<User>) => {
+  return userModel.findByIdAndUpdate(id, input, {
+    new: true,
+    runValidators: true,
+  });
+}
+
+
 // Sign Token
 export const signToken = async (user: DocumentType<User>) => {
   // Sign the access token
-  const access_token = signJwt(
+  const token = signJwt(
     { sub: user._id },
+    "accessTokenPrivateKey",
     {
       expiresIn: `${config.get<number>('accessTokenExpiresIn')}m`,
     }
   );
 
     // Sign the refresh token
-    const refresh_token = signJwt(
+    const refreshToken = signJwt(
         { sub: user._id },
+        "refreshTokenPrivateKey",
         {
             expiresIn: `${config.get<number>('refreshTokenExpiresIn')}d`,
         }
@@ -58,6 +68,6 @@ export const signToken = async (user: DocumentType<User>) => {
     
 
   // Return access token
-  return { access_token, refresh_token };
+  return { token, refreshToken };
 };
 

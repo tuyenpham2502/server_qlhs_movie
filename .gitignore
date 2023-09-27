@@ -11,8 +11,12 @@ node_modules
 *.sw?
 
 public/images/*
+public/FileStorage/*
 !public/images/.gitkeep
 .docker/data/db/*
 !.docker/data/db/.gitkeep
 .docker/data/redis/*
 !.docker/data/redis/.gitkeep
+
+#env
+.env
