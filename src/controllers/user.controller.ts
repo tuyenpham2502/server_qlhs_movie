@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
-import { findAllUsers } from '../services/user.service';
+import { findAllUsers, updateMe } from '../services/user.service';
+import { User } from '../models/user.model';
 
 export const getMeHandler = (
   req: Request,
@@ -37,4 +38,32 @@ export const getAllUsersHandler = async (
     next(err);
   }
 };
+
+
+export const updateMeHandler = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const user = res.locals.user;
+
+    const updatedUser = await updateMe(user._id, {
+      name: req.body.name,
+      avatar: req.body.avatar,
+    });
+
+    res.status(200).json({
+      status: 'success',
+      updateMyProfile: {
+        updatedUser,
+      },
+    });
+  
+    
+
+  } catch (err: any) {
+    next(err);
+  }
+}
 

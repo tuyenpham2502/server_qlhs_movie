@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import ImageModel from '../models/image.model';
 import { NextFunction } from 'express';
 
-const uploadImageController = async (req: any, res: any, next: NextFunction) => {
+export  const uploadImageController = async (req: any, res: any, next: NextFunction) => {
     try {
         if (!req.file) {
             const error = new Error('Please upload a file');
@@ -48,7 +48,7 @@ export const uploadMultiImageController = async (req: any, res: any, next: NextF
 }
 
 
-const getImageController = async (req: any, res: any, next: NextFunction) => {
+export const getImageController = async (req: any, res: any, next: NextFunction) => {
     try {
         const data = await ImageModel.find();
         res.send(data);
@@ -56,9 +56,21 @@ const getImageController = async (req: any, res: any, next: NextFunction) => {
     catch (err) {
         next(err);
     }
-
-
 }
 
-export { uploadImageController, getImageController };
+
+export const deleteImageController = async (req: any, res: any, next: NextFunction) => {
+    try{
+        const id = req.params.id;
+        const data = await ImageModel.findByIdAndDelete(id);
+        fs.unlinkSync(`./public/FileStorage/${data.image}`);
+        res.send(data);
+    }
+    catch(err){
+        next(err);
+    }
+}
+
+
+
 

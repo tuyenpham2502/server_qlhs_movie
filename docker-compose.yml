@@ -55,8 +55,8 @@ services:
 
 
   redis:
-    # ports:
-      # - "${REDIS_PORT}:${REDIS_PORT}"
+    ports:
+      - "${REDIS_PORT}:${REDIS_PORT}"
     image: redis
     command: redis-server
     networks:
