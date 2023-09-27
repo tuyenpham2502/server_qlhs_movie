@@ -19,4 +19,4 @@ public/FileStorage/*
 !.docker/data/redis/.gitkeep
 
 #env
-.env.local
+.env
