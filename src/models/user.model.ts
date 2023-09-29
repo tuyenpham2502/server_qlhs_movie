@@ -15,7 +15,8 @@ import { nanoid } from 'nanoid';
   if (!this.isModified('password')) return;
 
   // Hash password with costFactor of 12
-  this.password = await bcrypt.hash(this.password, 12);
+  const salt = await bcrypt.genSalt(12);
+  this.password = await bcrypt.hash(this.password, salt);
 })
 @modelOptions({
   schemaOptions: {
@@ -44,6 +45,12 @@ export class User {
 
   @prop({ default: null })
     avatar!: string;
+
+  @prop({ default: false })
+    isVerified!: boolean;
+
+  @prop({})
+    emailToken!: string | null;
 
   // Instance method to check if passwords match
   async comparePasswords(hashedPassword: string, candidatePassword: string) {

@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
-import { findAllUsers, updateMe } from '../services/user.service';
-import { User } from '../models/user.model';
+import { findAllUsers, findUser, signToken, updateMe } from '../services/user.service';
+import AppError from '../utils/appError';
 
 export const getMeHandler = (
   req: Request,
