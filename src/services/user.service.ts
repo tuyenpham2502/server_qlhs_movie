@@ -6,6 +6,7 @@ import { excludedFields } from '../controllers/auth.controller';
 import { signJwt } from '../utils/jwt';
 import redisClient from '../utils/connectRedis';
 import { DocumentType } from '@typegoose/typegoose';
+import bcrypt from 'bcryptjs';
 
 // CreateUser service
 export const createUser = async (input: Partial<User>) => {
@@ -39,6 +40,11 @@ export const updateMe = async (id: string, input: Partial<User>) => {
   });
 }
 
+
+//Hash the unique string
+export const hashUniqueString = async (uniqueString: string, saltRounds:number) => {
+  return await bcrypt.hash(uniqueString, saltRounds);
+}
 
 // Sign Token
 export const signToken = async (user: DocumentType<User>) => {
