@@ -20,5 +20,8 @@ router.get('/me', getMeHandler);
 // Update my info route
 router.put('/updateMe', updateMeHandler);
 
+
+
+
 export default router;
 
