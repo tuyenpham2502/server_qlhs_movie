@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { findAllUsers, findUser, signToken, updateMe } from '../services/user.service';
+import { findAllUsers, updateMe } from '../services/user.service';
 import AppError from '../utils/appError';
 
 export const getMeHandler = (
