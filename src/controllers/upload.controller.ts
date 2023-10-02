@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import ImageModel from '../models/image.model';
 import { NextFunction } from 'express';
 
-export  const uploadImageController = async (req: any, res: any, next: NextFunction) => {
+export const uploadImageController = async (req: any, res: any, next: NextFunction) => {
     try {
         if (!req.file) {
             const error = new Error('Please upload a file');
@@ -10,14 +10,13 @@ export  const uploadImageController = async (req: any, res: any, next: NextFunct
         }
 
         else {
-            ImageModel.create({
+            await ImageModel.create({
                 image: req.file.filename,
-            }).then((data: any) => {
-                res.send(data);
-            }
-            ).catch((err: any) => {
-                res.send(err);
             })
+            res.status(200).json({
+                success: true,
+                image: req.file,
+            });
         }
     } catch (err) {
         next(err);
@@ -31,15 +30,15 @@ export const uploadMultiImageController = async (req: any, res: any, next: NextF
             return next(error);
         }
         else {
-            req.files.forEach((file: any) => {
+            await req.files.forEach((file: any) => {
                 ImageModel.create({
                     image: file.filename,
                 })
             })
             res.status(200).json({
                 success: true,
-                message: 'Images uploaded successfully',
-            })
+                image: req.files,
+            });
         }
     }
     catch (err) {
@@ -60,13 +59,13 @@ export const getImageController = async (req: any, res: any, next: NextFunction)
 
 
 export const deleteImageController = async (req: any, res: any, next: NextFunction) => {
-    try{
+    try {
         const id = req.params.id;
         const data = await ImageModel.findByIdAndDelete(id);
         fs.unlinkSync(`./public/FileStorage/${data.image}`);
         res.send(data);
     }
-    catch(err){
+    catch (err) {
         next(err);
     }
 }
