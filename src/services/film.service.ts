@@ -6,8 +6,8 @@ export const createFilm = async (input: Partial<Film>) => {
         return newFilm;
 }
 
-export const getFilm = async (query: FilterQuery<Film>, options: QueryOptions={}) => {
-        const film = await FilmModel.find(query, {}, options).lean();
+export const getFilmById = async (query: FilterQuery<Film>, options: QueryOptions={}) => {
+        const film = await FilmModel.findById(query, {}, options).lean();
         return film;
 }
 
@@ -16,4 +16,13 @@ export const updateFilm = async (filmId: string, update: Partial<Film>) => {
         return film;
 }
 
+export const getFilmTopItems = async () => {
+        const film = await FilmModel.find().sort({ rate: -1 }).limit(10).lean();
+        return film;
+}
+
+export const getFilmLatestItems = async () => {
+        const film = await FilmModel.find().sort({ releaseDate: -1 }).limit(10).lean();
+        return film;
+}
 

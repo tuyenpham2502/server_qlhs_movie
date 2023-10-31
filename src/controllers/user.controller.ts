@@ -1,3 +1,4 @@
+import {getLatestUsers } from './../services/user.service';
 import { NextFunction, Request, Response } from 'express';
 import { findAllUsers, updateMe } from '../services/user.service';
 import AppError from '../utils/appError';
@@ -62,6 +63,24 @@ export const updateMeHandler = async (
   
     
 
+  } catch (err: any) {
+    next(err);
+  }
+}
+
+export const getLatestUsersHandler = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const users = await getLatestUsers();
+    res.status(200).json({
+      status: 'success',
+      getLatestUser: {
+        users,
+      },
+    });
   } catch (err: any) {
     next(err);
   }

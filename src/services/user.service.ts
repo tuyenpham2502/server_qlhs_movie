@@ -25,6 +25,10 @@ export const findAllUsers = async () => {
   return await userModel.find();
 };
 
+export const getLatestUsers = async () => {
+  return await userModel.find().sort({ createdAt: -1 }).limit(10).lean();
+}
+
 // Find one user by any fields
 export const findUser = async (
   query: FilterQuery<User>,

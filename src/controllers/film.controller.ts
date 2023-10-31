@@ -1,7 +1,8 @@
-import { updateFilm } from './../services/film.service';
+import {getFilmLatestItems, updateFilm } from './../services/film.service';
 import { CreateFilmInput } from "../schema/film.schema";
 import { CookieOptions, NextFunction, Request, Response } from "express";
-import { createFilm, getFilm } from "../services/film.service";
+import { createFilm, getFilmById, getFilmTopItems } from "../services/film.service";
+import { object } from 'zod';
 
 
 export const createFilmHandler = async (
@@ -25,6 +26,7 @@ export const createFilmHandler = async (
             director: req.body.director,
             cast: req.body.cast,
             trailer: req.body.trailer,
+            rate: req.body.rate,
         });
         res.status(200).json({
             success: true,
@@ -44,7 +46,7 @@ export const getFilmHandler = async (
     next: NextFunction
 ) => {
     try {
-        const film = await getFilm({ filmId: req.params.filmId });
+        const film = await getFilmById({ _id: req.params._id });
         res.status(200).json({
             success: true,
             film,
@@ -60,7 +62,7 @@ export const updateFilmHandler = async (
     next: NextFunction
 ) => {
     try {
-        const film = await updateFilm(req.params.filmId, req.body);
+        const film = await updateFilm(req.params._id, req.body);
         res.status(200).json({
             success: true,
             updateFilm: {
@@ -71,3 +73,37 @@ export const updateFilmHandler = async (
         next(err);
     }
 }
+
+export const getTopFilmHandler = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        const film = await getFilmTopItems();
+        res.status(200).json({
+            success: true,
+            film,
+        });
+    } catch (err: any) {
+        next(err);
+    }
+}
+
+export const getLatestFilmHandler = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        const film = await getFilmLatestItems();
+        res.status(200).json({
+            success: true,
+            film,
+        });
+    } catch (err: any) {
+        next(err);
+    }
+}
+
+
