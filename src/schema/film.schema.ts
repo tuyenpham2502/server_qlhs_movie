@@ -1,12 +1,17 @@
 import { array, date, number, object, string, TypeOf } from 'zod';
+import { validateImageFile } from '../helpers';
 
 export const createFilmSchema = object({
     body: object({
         title: string({ required_error: 'Title is required' }),
         description: string().max(1000, 'Description must be less than 1000 characters'),
-        filmBanner: array(string({ required_error: 'Film Banner is required' })),
-        filmImage: string({ required_error: 'Film Image is required' }),
-        releaseDate: string({required_error: 'Release Date is required' }).refine((dateString) => {
+        filmBanner: array(string({ required_error: 'Film Banner is required' }).refine((fileName) => {
+            validateImageFile(fileName), {
+
+            }
+        })),
+        filmImage: string({ required_error: 'Film Image is required'     }),
+        releaseDate: string({ required_error: 'Release Date is required' }).refine((dateString) => {
             return !isNaN(new Date(dateString).getDate());
         }, { message: 'Invalid date' }),
         time: string({ required_error: 'Time is required' }),
@@ -18,6 +23,7 @@ export const createFilmSchema = object({
         director: array(string({ required_error: 'Director is required' })),
         cast: array(string({ required_error: 'Cast is required' })),
         trailer: string({ required_error: 'Trailer is required' }),
+        rate: number({ required_error: 'Rate is required' }),
     }),
 });
 

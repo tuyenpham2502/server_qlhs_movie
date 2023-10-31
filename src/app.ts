@@ -39,6 +39,7 @@ app.use('/api/auth', authRouter);
 app.use('/api', uploadRouter);
 app.use('/api/film', filmRouter);
 
+// Use type assertion to avoid TypeScript errors
 
 // Testing
 app.get('/healthChecker', (req: Request, res: Response, next: NextFunction) => {

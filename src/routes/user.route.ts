@@ -1,6 +1,7 @@
 import express from 'express';
 import {
   getAllUsersHandler,
+  getLatestUsersHandler,
   getMeHandler,
   updateMeHandler,
 } from '../controllers/user.controller';
@@ -19,6 +20,9 @@ router.get('/me', getMeHandler);
 
 // Update my info route
 router.put('/updateMe', updateMeHandler);
+
+// Get latest users
+router.get('/getLatestUsers', restrictTo('admin'), getLatestUsersHandler);
 
 
 
