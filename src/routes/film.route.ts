@@ -1,5 +1,5 @@
 import express from 'express';
-import { createFilmHandler, getFilmHandler, getLatestFilmHandler, getTopFilmHandler, updateFilmHandler } from './../controllers/film.controller';
+import { createFilmHandler, getFilmHandler, getFilmsHandler, updateFilmHandler } from './../controllers/film.controller';
 import { deserializeUser } from '../middleware/deserializeUser';
 import { requireUser } from '../middleware/requireUser';
 import { restrictTo } from '../middleware/restrictTo';
@@ -17,10 +17,9 @@ router.get('/getFilm/:_id', getFilmHandler);
 // Admin Update Film route
 router.patch('/updateFilm/:_id', restrictTo('admin'), updateFilmHandler);
 
-// Admin Get Top Film route
-router.get('/getTopFilm', restrictTo('admin'), getTopFilmHandler);
+// Get films
+router.get('/getFilms', restrictTo('admin'), getFilmsHandler);
 
-router.get('/getLatestFilm', restrictTo('admin'), getLatestFilmHandler);
 
 
 

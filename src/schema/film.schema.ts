@@ -23,7 +23,7 @@ export const createFilmSchema = object({
         director: array(string({ required_error: 'Director is required' })),
         cast: array(string({ required_error: 'Cast is required' })),
         trailer: string({ required_error: 'Trailer is required' }),
-        rate: number({ required_error: 'Rate is required' }),
+        rating: number({ required_error: 'Rating is required' }),
     }),
 });
 

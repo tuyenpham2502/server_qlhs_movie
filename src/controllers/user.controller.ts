@@ -1,4 +1,3 @@
-import {getLatestUsers } from './../services/user.service';
 import { NextFunction, Request, Response } from 'express';
 import { findAllUsers, updateMe } from '../services/user.service';
 import AppError from '../utils/appError';
@@ -21,13 +20,13 @@ export const getMeHandler = (
   }
 };
 
-export const getAllUsersHandler = async (
+export const getUsersHandler = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const users = await findAllUsers();
+    const users = await findAllUsers(req.query, req.body.options);
     res.status(200).json({
       status: 'success',
       result: users.length,
@@ -68,21 +67,4 @@ export const updateMeHandler = async (
   }
 }
 
-export const getLatestUsersHandler = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const users = await getLatestUsers();
-    res.status(200).json({
-      status: 'success',
-      getLatestUser: {
-        users,
-      },
-    });
-  } catch (err: any) {
-    next(err);
-  }
-}
 

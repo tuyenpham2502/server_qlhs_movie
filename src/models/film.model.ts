@@ -71,7 +71,7 @@ export class Film {
     isDeleted!: boolean;
 
     @prop({ default: 0 })
-    rate !: number;
+    rating !: number;
     
 
 

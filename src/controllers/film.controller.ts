@@ -1,7 +1,6 @@
-import {getFilmLatestItems, updateFilm } from './../services/film.service';
+import {updateFilm, createFilm, getFilmById, getFilm } from './../services/film.service';
 import { CreateFilmInput } from "../schema/film.schema";
 import { CookieOptions, NextFunction, Request, Response } from "express";
-import { createFilm, getFilmById, getFilmTopItems } from "../services/film.service";
 import { object } from 'zod';
 
 
@@ -26,7 +25,7 @@ export const createFilmHandler = async (
             director: req.body.director,
             cast: req.body.cast,
             trailer: req.body.trailer,
-            rate: req.body.rate,
+            rating: req.body.rating,
         });
         res.status(200).json({
             success: true,
@@ -74,32 +73,16 @@ export const updateFilmHandler = async (
     }
 }
 
-export const getTopFilmHandler = async (
+export const getFilmsHandler = async (
     req: Request,
     res: Response,
     next: NextFunction
 ) => {
     try {
-        const film = await getFilmTopItems();
+        const films = await getFilm(req.query, req.body.options);
         res.status(200).json({
             success: true,
-            film,
-        });
-    } catch (err: any) {
-        next(err);
-    }
-}
-
-export const getLatestFilmHandler = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-) => {
-    try {
-        const film = await getFilmLatestItems();
-        res.status(200).json({
-            success: true,
-            film,
+            films,
         });
     } catch (err: any) {
         next(err);
