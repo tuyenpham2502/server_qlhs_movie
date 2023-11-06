@@ -30,7 +30,7 @@ export const getComment = async (
   filter: FilterQuery<Comment>,
   options: QueryOptions = { lean: true }
 ) => {
-  const comment = await CommentModel.findAll(
+  const comment = await CommentModel.find(
     {
       ...filter,
       parent_id: null,
