@@ -16,7 +16,7 @@ export const updateFilm = async (filmId: string, update: Partial<Film>) => {
         return film;
 }
 
-export const getFilm = async (query: FilterQuery<Film>, options: QueryOptions={}) => {
+export const getFilms = async (query: FilterQuery<Film>, options: QueryOptions={}) => {
         const film = await FilmModel.find(query, {}, options).lean();
         return film;
 }

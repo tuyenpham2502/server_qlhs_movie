@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { findAllUsers, updateMe } from '../services/user.service';
 import AppError from '../utils/appError';
+import { queryHelper } from '../helpers';
 
 export const getMeHandler = (
   req: Request,
@@ -26,7 +27,10 @@ export const getUsersHandler = async (
   next: NextFunction
 ) => {
   try {
-    const users = await findAllUsers(req.query, req.body.options);
+
+    let query = queryHelper(req.query);
+
+    const users = await findAllUsers({}, query);
     res.status(200).json({
       status: 'success',
       result: users.length,

@@ -1,7 +1,6 @@
-import {updateFilm, createFilm, getFilmById, getFilm } from './../services/film.service';
+import {updateFilm, createFilm, getFilmById, getFilms } from './../services/film.service';
 import { CreateFilmInput } from "../schema/film.schema";
 import { CookieOptions, NextFunction, Request, Response } from "express";
-import { object } from 'zod';
 
 
 export const createFilmHandler = async (
@@ -79,7 +78,8 @@ export const getFilmsHandler = async (
     next: NextFunction
 ) => {
     try {
-        const films = await getFilm(req.query, req.body.options);
+
+        const films = await getFilms({}, req.params);
         res.status(200).json({
             success: true,
             films,
