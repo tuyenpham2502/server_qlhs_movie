@@ -55,7 +55,6 @@ export const registerHandler = async (
     // Send verification email
     sendVerificationEmail(user, res);
 
-    
   } catch (err: any) {
     if (err.code === 11000) {
       return res.status(202).json({

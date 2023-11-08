@@ -21,9 +21,10 @@ export const findUserById = async (id: string) => {
 };
 
 // Find All users
-export const findAllUsers = async () => {
-  return await userModel.find();
+export const findAllUsers = async (query: FilterQuery<User>, options: QueryOptions={}) => {
+  return await userModel.find(query, {}, options).lean();
 };
+
 
 // Find one user by any fields
 export const findUser = async (

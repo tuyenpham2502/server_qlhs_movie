@@ -1,6 +1,6 @@
 export default {
-  port: 8080,
-  accessTokenExpiresIn: 15,
-  refreshTokenExpiresIn: 30,
+  port: 8000,
+  accessTokenExpiresIn: 60,
+  refreshTokenExpiresIn: 120,
   origin: '*',
 };

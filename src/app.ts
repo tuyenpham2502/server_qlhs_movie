@@ -7,7 +7,9 @@ import cookieParser from 'cookie-parser';
 import connectDB from './utils/connectDB';
 import userRouter from './routes/user.route';
 import authRouter from './routes/auth.route';
+import filmRouter from './routes/film.route';
 import uploadRouter from './routes/images.route';
+import commentRouter from './routes/comment.route';
 import path from 'path';
 const app = express();
 
@@ -36,6 +38,11 @@ app.use(
 app.use('/api/users', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api', uploadRouter);
+app.use('/api/film', filmRouter);
+app.use('/api/comment', commentRouter);
+
+// Use type assertion to avoid TypeScript errors
+
 // Testing
 app.get('/healthChecker', (req: Request, res: Response, next: NextFunction) => {
   res.status(200).json({

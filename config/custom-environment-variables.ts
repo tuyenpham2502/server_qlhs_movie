@@ -7,5 +7,5 @@ export default {
   adminSiteUrl: 'ADMIN_SITE_URL',
   authEmail: 'AUTH_EMAIL',
   authPassword: 'AUTH_PASSWORD',
-  
+
 };
