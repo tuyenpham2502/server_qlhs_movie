@@ -5,8 +5,9 @@
   "author": "Pham Tuyen",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpileOnly ./src/app.ts",
-    "start": "ts-node ./src/app.ts"
+    "dev": "env-cmd -f src/.env.development ts-node-dev --respawn --transpile-only ./src/app.ts",
+    "start": "env-cmd -f src/.env.development ts-node ./src/app.ts",
+    "prod": "pm2-runtime start ecosystem.config.js --env development"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",

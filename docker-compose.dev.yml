@@ -5,6 +5,8 @@ services:
       context: .
       dockerfile: Dockerfile
     image: qlhs-app 
+    stdin_open: true
+    command: ${command}
     volumes:
       - ./:/app # mount the current directory to /app inside the container
     environment:
@@ -18,7 +20,7 @@ services:
       - "${PORT}:${PORT}"
     restart: unless-stopped
     env_file:
-      - .env
+      - src/.env.development
     depends_on:
       - db
       - redis
