@@ -5,6 +5,8 @@ services:
       context: .
       dockerfile: Dockerfile
     image: qlhs-app 
+    stdin_open: true
+    command: ${command}
     volumes:
       - ./:/app # mount the current directory to /app inside the container
     environment:
