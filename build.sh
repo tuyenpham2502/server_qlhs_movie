@@ -9,18 +9,14 @@ do
   esac
 done
 
-while IFS= read -r line; do
-  export "$line"
-done < src/.env
-
 # Export to system env for docker compose 
 export version=$env-v$version
 case "$env" in
   development)
-    source src/.env
+    source .env
     export env=dev
     export COMPOSE_PROJECT_NAME="qlhs-dev-server-services" 
-    export command='yarn prod'
+    export command='yarn dev'
     ;;
 #    uat)
 #       export env=uat

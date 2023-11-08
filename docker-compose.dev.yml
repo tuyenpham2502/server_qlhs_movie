@@ -20,7 +20,7 @@ services:
       - "${PORT}:${PORT}"
     restart: unless-stopped
     env_file:
-      - src/.env.development
+      - .env
     depends_on:
       - db
       - redis

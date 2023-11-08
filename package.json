@@ -5,9 +5,8 @@
   "author": "Pham Tuyen",
   "license": "MIT",
   "scripts": {
-    "dev": "pm2-runtime start ecosystem.config.js --env development",
-    "start": "pm2-runtime start ecosystem.config.js --env development",
-    "prod": "pm2-runtime start ecosystem.config.js --env development"
+    "start": " ts-node ./src/app.ts",
+    "dev": "pm2-runtime start ecosystem.config.js --env development"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
