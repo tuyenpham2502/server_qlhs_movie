@@ -5,8 +5,8 @@
   "author": "Pham Tuyen",
   "license": "MIT",
   "scripts": {
-    "dev": "env-cmd -f src/.env.development ts-node-dev --respawn --transpile-only ./src/app.ts",
-    "start": "env-cmd -f src/.env.development ts-node ./src/app.ts",
+    "dev": "pm2-runtime start ecosystem.config.js --env development",
+    "start": "pm2-runtime start ecosystem.config.js --env development",
     "prod": "pm2-runtime start ecosystem.config.js --env development"
   },
   "devDependencies": {
